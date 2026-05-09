@@ -1,0 +1,30 @@
+# Environment files
+.env
+.env.local
+.env.production
+
+# PHP config files
+config.php
+db_credentials.php
+
+# Database backups
+*.sql
+
+# Logs
+*.log
+
+# Vendor & node modules
+/vendor/
+/node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Secret files
+secret.php
+credentials.php
