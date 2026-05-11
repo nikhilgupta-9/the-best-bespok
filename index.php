@@ -476,7 +476,7 @@
                             <h1>Crafted Just For You</h1>
                             <p>Experience the art of bespoke tailoring with perfectly fitted suits designed to match your personality and style.</p>
                             <div class="banner-button">
-                                <a class="primary-btn" href="<?= BASE_URL ?>custumize.php">CUSTOM SUITS</a>
+                                <a class="primary-btn" href="<?= BASE_URL ?>suit-configurator.php">CUSTOM SUITS</a>
                                 <a class="primary-btn women-shop-btn" href="3columns-left.html">BOOK APPOINTMENT</a>
                             </div>
                         </div>

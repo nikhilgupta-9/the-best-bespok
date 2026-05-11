@@ -33,7 +33,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </li>
 
         <!-- Home Content -->
-        <li class="<?= in_array($current_page, ['home-items.php','add-banner.php']) ? 'active' : '' ?>">
+        <li class="<?= in_array($current_page, ['home-items.php', 'add-banner.php']) ? 'active' : '' ?>">
             <a class="has-arrow" href="#">
                 <i class="fas fa-home" style="color:#e74c3c;"></i>
                 <span>Home Content</span>
@@ -49,7 +49,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </li>
 
         <!-- Categories -->
-        <li class="<?= in_array($current_page, ['add-categories.php','view-categories.php','add-sub-category.php','view-sub-categories.php']) ? 'active' : '' ?>">
+        <li class="<?= in_array($current_page, ['add-categories.php', 'view-categories.php', 'add-sub-category.php', 'view-sub-categories.php']) ? 'active' : '' ?>">
             <a class="has-arrow" href="#">
                 <i class="fas fa-layer-group" style="color:#2ecc71;"></i>
                 <span>Categories</span>
@@ -71,7 +71,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </li>
 
         <!-- Products -->
-        <li class="<?= in_array($current_page, ['add-products.php','view-products.php','show-products.php','show-products-review.php','manage-fabric.php','add-fabric.php','edit-fabric.php','manage-colors.php','add-color.php','edit-color.php','manage-sizes.php']) ? 'active' : '' ?>">
+        <li class="<?= in_array($current_page, ['add-products.php', 'view-products.php', 'show-products.php', 'show-products-review.php', 'manage-fabric.php', 'add-fabric.php', 'edit-fabric.php', 'manage-colors.php', 'add-color.php', 'edit-color.php', 'manage-sizes.php']) ? 'active' : '' ?>">
             <a class="has-arrow" href="#">
                 <i class="fas fa-box-open" style="color:#f39c12;"></i>
                 <span>Products</span>
@@ -80,8 +80,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <li class="<?= $current_page === 'add-products.php' ? 'active' : '' ?>">
                     <a href="add-products.php">Add Product</a>
                 </li>
-                <li class="<?= in_array($current_page, ['view-products.php','show-products.php']) ? 'active' : '' ?>">
+                <li class="<?= in_array($current_page, ['view-products.php', 'view-products.php']) ? 'active' : '' ?>">
                     <a href="view-products.php">View Products</a>
+                </li>
+                <li class="<?= in_array($current_page, ['manage-product-fabrics.php', 'manage-product-fabrics.php']) ? 'active' : '' ?>">
+                    <a href="manage-product-fabrics.php">Manage Product Fabric</a>
+                </li>
+                <li class="<?= in_array($current_page, ['manage-variant-images.php', 'manage-variant-images.php']) ? 'active' : '' ?>">
+                    <a href="manage-variant-images.php"> Variant Images</a>
                 </li>
                 <li class="<?= $current_page === 'show-products-review.php' ? 'active' : '' ?>">
                     <a href="show-products-review.php">Product Reviews</a>
@@ -94,13 +100,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </small>
                 </li>
 
-                <li class="<?= in_array($current_page, ['manage-fabric.php','add-fabric.php','edit-fabric.php']) ? 'active' : '' ?>">
+
+                <li class="<?= in_array($current_page, ['manage-fabric.php', 'add-fabric.php', 'edit-fabric.php']) ? 'active' : '' ?>">
                     <a href="manage-fabric.php">
                         <i class="fas fa-scroll" style="color:#c19a6b;font-size:11px;"></i>
                         Fabric Options
                     </a>
                 </li>
-                <li class="<?= in_array($current_page, ['manage-colors.php','add-color.php','edit-color.php']) ? 'active' : '' ?>">
+                <li class="<?= in_array($current_page, ['manage-colors.php', 'add-color.php', 'edit-color.php']) ? 'active' : '' ?>">
                     <a href="manage-colors.php">
                         <i class="fas fa-palette" style="color:#8e44ad;font-size:11px;"></i>
                         Color Options
@@ -118,13 +125,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <!-- ======================================
              NEW: Suit Configurator
         ======================================= -->
-        <li class="<?= in_array($current_page, ['customization-options.php','add-customization-option.php','edit-customization-option.php','configurator-steps.php']) ? 'active' : '' ?>">
+        <li class="<?= in_array($current_page, ['customization-options.php', 'add-customization-option.php', 'edit-customization-option.php', 'configurator-steps.php']) ? 'active' : '' ?>">
             <a class="has-arrow" href="#">
                 <i class="fas fa-magic" style="color:#e91e8c;"></i>
                 <span>Suit Configurator</span>
             </a>
             <ul>
-                <li class="<?= in_array($current_page, ['customization-options.php','add-customization-option.php','edit-customization-option.php']) ? 'active' : '' ?>">
+                <li class="<?= in_array($current_page, ['customization-options.php', 'add-customization-option.php', 'edit-customization-option.php']) ? 'active' : '' ?>">
                     <a href="customization-options.php">
                         <i class="fas fa-sliders-h" style="color:#e91e8c;font-size:11px;"></i>
                         Customization Options
@@ -142,7 +149,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <!-- ======================================
              NEW: Orders
         ======================================= -->
-        <li class="<?= in_array($current_page, ['view-orders.php','view-order-detail.php','view-custom-orders.php','view-custom-order-detail.php']) ? 'active' : '' ?>">
+        <li class="<?= in_array($current_page, ['view-orders.php', 'view-order-detail.php', 'view-custom-orders.php', 'view-custom-order-detail.php']) ? 'active' : '' ?>">
             <a class="has-arrow" href="#">
                 <i class="fas fa-shopping-bag" style="color:#e67e22;"></i>
                 <span>Orders</span>
@@ -154,13 +161,13 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 ?>
             </a>
             <ul>
-                <li class="<?= in_array($current_page, ['view-orders.php','view-order-detail.php']) ? 'active' : '' ?>">
+                <li class="<?= in_array($current_page, ['view-orders.php', 'view-order-detail.php']) ? 'active' : '' ?>">
                     <a href="view-orders.php">
                         <i class="fas fa-receipt" style="color:#e67e22;font-size:11px;"></i>
                         All Orders
                     </a>
                 </li>
-                <li class="<?= in_array($current_page, ['view-custom-orders.php','view-custom-order-detail.php']) ? 'active' : '' ?>">
+                <li class="<?= in_array($current_page, ['view-custom-orders.php', 'view-custom-order-detail.php']) ? 'active' : '' ?>">
                     <a href="view-custom-orders.php">
                         <i class="fas fa-cut" style="color:#e91e8c;font-size:11px;"></i>
                         Custom Suit Orders
@@ -170,7 +177,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </li>
 
         <!-- Blogs & News -->
-        <li class="<?= in_array($current_page, ['add-blog.php','view-all-blog.php']) ? 'active' : '' ?>">
+        <li class="<?= in_array($current_page, ['add-blog.php', 'view-all-blog.php']) ? 'active' : '' ?>">
             <a class="has-arrow" href="#">
                 <i class="fas fa-blog" style="color:#9b59b6;"></i>
                 <span>Blogs &amp; News</span>
@@ -186,7 +193,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </li>
 
         <!-- Our Brands -->
-        <li class="<?= in_array($current_page, ['our-best-brand.php','view_brands.php']) ? 'active' : '' ?>">
+        <li class="<?= in_array($current_page, ['our-best-brand.php', 'view_brands.php']) ? 'active' : '' ?>">
             <a class="has-arrow" href="#">
                 <i class="fas fa-award" style="color:#1abc9c;"></i>
                 <span>Our Brand's</span>
@@ -242,7 +249,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </li>
 
         <!-- Users -->
-        <li class="<?= in_array($current_page, ['all-admin.php','admin-create.php']) ? 'active' : '' ?>">
+        <li class="<?= in_array($current_page, ['all-admin.php', 'admin-create.php']) ? 'active' : '' ?>">
             <a class="has-arrow" href="#">
                 <i class="fas fa-user-cog" style="color:#7f8c8d;"></i>
                 <span>Users</span>
@@ -269,31 +276,31 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </nav>
 
 <script>
-// Sidebar search — shows/hides top-level <li> based on text match
-document.getElementById('sidebarSearch').addEventListener('input', function () {
-    const filter = this.value.toLowerCase().trim();
-    const items  = document.querySelectorAll('#sidebar_menu > li');
+    // Sidebar search — shows/hides top-level <li> based on text match
+    document.getElementById('sidebarSearch').addEventListener('input', function() {
+        const filter = this.value.toLowerCase().trim();
+        const items = document.querySelectorAll('#sidebar_menu > li');
 
-    items.forEach(li => {
-        if (!filter) {
-            li.style.display = '';
-            return;
-        }
-        const text = li.textContent.toLowerCase();
-        li.style.display = text.includes(filter) ? '' : 'none';
+        items.forEach(li => {
+            if (!filter) {
+                li.style.display = '';
+                return;
+            }
+            const text = li.textContent.toLowerCase();
+            li.style.display = text.includes(filter) ? '' : 'none';
+        });
     });
-});
 
-// Auto-expand the active parent menu on page load
-document.addEventListener('DOMContentLoaded', function () {
-    const activeItem = document.querySelector('#sidebar_menu li.active');
-    if (activeItem) {
-        const parentUl = activeItem.closest('ul:not(#sidebar_menu)');
-        if (parentUl) {
-            parentUl.style.display = 'block';
-            const parentLi = parentUl.closest('li');
-            if (parentLi) parentLi.classList.add('active');
+    // Auto-expand the active parent menu on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const activeItem = document.querySelector('#sidebar_menu li.active');
+        if (activeItem) {
+            const parentUl = activeItem.closest('ul:not(#sidebar_menu)');
+            if (parentUl) {
+                parentUl.style.display = 'block';
+                const parentLi = parentUl.closest('li');
+                if (parentLi) parentLi.classList.add('active');
+            }
         }
-    }
-});
+    });
 </script>
