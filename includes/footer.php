@@ -280,3 +280,65 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ── Auto-open login modal ─────────────────────
+        const urlParams = new URLSearchParams(window.location.search);
+        const hashLogin = window.location.hash === '#user-login';
+        const queryLogin = urlParams.get('open_login') === '1';
+
+        // Also open if session has errors (PHP sets data attr)
+        const hasError = document.querySelector('[data-login-error]');
+
+        if (queryLogin || hashLogin || hasError) {
+            const modalEl = document.getElementById('user-login');
+            if (modalEl && typeof bootstrap !== 'undefined') {
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            }
+
+            // Clean the URL so refresh doesn't re-open
+            if (queryLogin && history.replaceState) {
+                const cleanUrl = window.location.pathname + window.location.hash;
+                history.replaceState(null, '', cleanUrl);
+            }
+        }
+
+        // ── My Account link click guard ───────────────
+        // If user clicks "My Account" link in header nav when NOT logged in,
+        // open login modal instead of going to my-account.php
+        // (This is a backup — server-side redirect is the primary guard)
+        document.querySelectorAll('a[href*="my-account.php"]').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                // Check if user is logged in via a data attribute set by PHP in header
+                const isLoggedIn = document.body.dataset.loggedIn === '1';
+                if (!isLoggedIn) {
+                    e.preventDefault();
+                    // Store where they want to go
+                    sessionStorage.setItem('afterLogin', 'my-account.php');
+                    const modalEl = document.getElementById('user-login');
+                    if (modalEl && typeof bootstrap !== 'undefined') {
+                        new bootstrap.Modal(modalEl).show();
+                    }
+                }
+            });
+        });
+
+        // ── Password toggle (login popup) ────────────
+        function setupToggle(toggleId, inputId) {
+            const toggle = document.getElementById(toggleId);
+            const input = document.getElementById(inputId);
+            if (!toggle || !input) return;
+            toggle.addEventListener('click', function() {
+                input.type = input.type === 'password' ? 'text' : 'password';
+                this.classList.toggle('bi-eye');
+                this.classList.toggle('bi-eye-slash');
+            });
+        }
+        setupToggle('togglePassword', 'password');
+        setupToggle('togglePassword2', 'password2');
+        setupToggle('togglePassword3', 'password3');
+    });
+</script>

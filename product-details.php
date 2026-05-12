@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "config/connect.php";
 include_once "util/function.php";
 
@@ -183,7 +184,7 @@ $total_reviews = $rating_data['total'];
     </style>
 </head>
 
-<body>
+<body data-logged-in="<?= !empty($_SESSION['user_id']) ? '1' : '0' ?>">
 
     <!-- product view modal -->
     <div class="modal product-view-modal" id="product-view">

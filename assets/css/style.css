@@ -3051,7 +3051,7 @@ header.header1 .nav-right .mobile-menu-btn {
   }
   header.header1 .main-menu .mobile-menu-logo {
     text-align: left;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     display: flex;
     justify-content: center;
     padding-bottom: 8px;
@@ -19148,3 +19148,18 @@ header.header3 .button-area .header-btn {
   color: var(--title-color);
 }/*# sourceMappingURL=style.css.map */
 
+
+.logo-img{
+  max-width: 70%;
+}
+
+@media (max-width: 576px){
+  .logo-img {
+    max-width: 44%;
+  }
+  .mobile-menu-logo a img {
+    max-width: 44%;
+    display: flex;
+    justify-content: center;
+  }
+}

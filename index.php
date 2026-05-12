@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once "config/connect.php";
+include_once "util/function.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,7 +137,7 @@
     }
 </style>
 
-<body>
+<body data-logged-in="<?= !empty($_SESSION['user_id']) ? '1' : '0' ?>">
 
     <!-- on page load modal -->
     <div class="page-load-modal">
@@ -464,7 +469,7 @@
     <div class="home1-banner-section">
         <div class="banner-wrapper video-bg">
             <video class="banner-video" autoplay loop muted playsinline>
-                <source src="assets/image/video/about-v1.mp4" type="video/mp4">
+                <source src="<?= BASE_URL ?>assets/image/video/home-v1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="video-overlay"></div>
