@@ -1,8 +1,11 @@
+<?php
+session_start();
+include_once "config/connect.php";
+include_once "util/function.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- Mirrored from demo-egenslab.b-cdn.net/html/ethics-html/preview/faq.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Apr 2026 01:10:34 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +27,7 @@
     <link rel="icon" href="assets/image/thumbnail.svg" type="image/gif" sizes="20x20">
 </head>
 
-<body>
+<body data-logged-in="<?= !empty($_SESSION['user_id']) ? '1' : '0' ?>">
 
     <!-- product view modal  -->
     <div class="modal product-view-modal" id="product-view">

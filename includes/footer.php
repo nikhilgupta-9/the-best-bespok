@@ -104,46 +104,35 @@
                             <h5>Category</h5>
                         </div>
                         <ul class="widget-list">
+                            <?php
+                            $footer_category = select_query("categories", "WHERE status = 1 limit 8");
+                            if($footer_category){
+                            foreach($footer_category as $f_c){
+                            ?>
                             <li>
-                                <a href="<?= BASE_URL ?>categories.php">
-                                    Men
+                                <a href="<?= BASE_URL ?>category/<?= $f_c['slug_url'] ?>">
+                                    <?= $f_c['name'] ?>
                                     <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3" cy="3" r="3" />
                                     </svg>
                                 </a>
                             </li>
+                            <?php
+                         }
+                        }else{
+                            ?>
                             <li>
-                                <a href="<?= BASE_URL ?>categories.php">
-                                    Women
+                                <a href="<?= BASE_URL ?>">
+                                    No Category Found
                                     <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3" cy="3" r="3" />
                                     </svg>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?= BASE_URL ?>categories.php">
-                                    Kids
-                                    <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="3" cy="3" r="3" />
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= BASE_URL ?>categories.php">
-                                    Bag
-                                    <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="3" cy="3" r="3" />
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= BASE_URL ?>categories.php">
-                                    Fragrance
-                                    <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="3" cy="3" r="3" />
-                                    </svg>
-                                </a>
-                            </li>
+                            <?php
+                        }
+                          ?>
+                           
                         </ul>
                     </div>
                 </div>
