@@ -4,7 +4,7 @@
 // Handles the login form POST from login-popup.php
 // ================================================================
 session_start();
-include_once "config/connect.php";
+include_once "../config/connect.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: ".BASE_URL.""); exit();

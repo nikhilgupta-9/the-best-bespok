@@ -150,14 +150,7 @@
                                     </svg>
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?= BASE_URL ?>contact.php">
-                                    Our Offline Store
-                                    <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="3" cy="3" r="3" />
-                                    </svg>
-                                </a>
-                            </li>
+                           
                            <li>
                                 <a href="<?= BASE_URL ?>faq.php">
                                     FAQ’s
@@ -167,7 +160,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="<?= BASE_URL ?>policy.php#returns">
                                     Return & Refunds
                                     <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3" cy="3" r="3" />
@@ -175,7 +168,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="<?= BASE_URL ?>policy.php#privacy">
                                     Privacy Policy
                                     <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3" cy="3" r="3" />
@@ -183,8 +176,16 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    Help & Support
+                                <a href="<?= BASE_URL ?>policy.php#terms">
+                                    Term's & Conditions
+                                    <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="3" cy="3" r="3" />
+                                    </svg>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="<?= BASE_URL ?>policy.php#shipping">
+                                    Shipping Policy
                                     <svg width="6" height="6" viewBox="0 0 6 6" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3" cy="3" r="3" />
                                     </svg>
@@ -261,7 +262,7 @@
                                             d="M11.3998 1C11.559 1 11.7116 1.06585 11.8241 1.18306C11.9366 1.30027 11.9998 1.45924 11.9998 1.625V10.375C11.9998 10.5408 11.9366 10.6997 11.8241 10.8169C11.7116 10.9342 11.559 11 11.3998 11C11.2407 11 11.0881 10.9342 10.9755 10.8169C10.863 10.6997 10.7998 10.5408 10.7998 10.375V1.625C10.7998 1.45924 10.863 1.30027 10.9755 1.18306C11.0881 1.06585 11.2407 1 11.3998 1Z" />
                                     </g>
                                 </svg>
-                                <p>Our Business <a href="#">Policy, Terms & Condition</a></p>
+                                <p>Our Business <a href="<?= BASE_URL ?>policy.php">Policy, Terms & Condition</a></p>
                             </div>
                         </div>
                     </div>

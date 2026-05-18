@@ -18,10 +18,9 @@ $host = $_ENV['DB_HOST'];
 $username = $_ENV['DB_USERNAME'];
 $password = $_ENV['DB_PASSWORD'];
 $dbName = $_ENV['DB_NAME'];
-$site = $_ENV['SITE'];
-
-// Make `$site` global
-global $site;
+define('BASE_URL', $_ENV['SITE']);
+// Make `BASE_URL` global
+// global BASE_URL;
 
 // Create Database Connection
 $conn = new mysqli($host, $username, $password, $dbName);

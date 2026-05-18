@@ -20,9 +20,10 @@ $username = $_ENV['DB_USERNAME'];
 $password = $_ENV['DB_PASSWORD'];
 $dbName = $_ENV['DB_NAME'];
 define('BASE_URL', $_ENV['SITE']);
+define('RZP_KEY_ID',     $_ENV['RAZORPAY_KEY_ID']     ?? '');
+define('RZP_KEY_SECRET', $_ENV['RAZORPAY_KEY_SECRET']  ?? '');
 
-// Make `$site` global
-global $site;
+// Make `BASE_URL` global
 
 // Create Database Connection
 $conn = new mysqli($host, $username, $password, $dbName);

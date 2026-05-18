@@ -6804,7 +6804,7 @@ header.header3 .button-area .header-btn {
 }
 .product-card .product-card-content h6 a {
   color: var(--title-color);
-  font-size: 16px;
+  font-size: 17px;
   font-family: var(--font-outfit);
   font-weight: 500;
   text-transform: capitalize;
@@ -18051,7 +18051,7 @@ header.header3 .button-area .header-btn {
   color: var(--white-color);
 }
 .shop-details-top-section .shop-details-img.style-4 .shop-details-tab-img .video-overlay {
-  background-color: rgba(34, 34, 34, 0.5);
+  background-color: rgba(34, 34, 34, 0.089);
   position: absolute;
   top: 0;
   left: 0;

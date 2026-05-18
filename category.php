@@ -8,6 +8,7 @@ $cat = getProductByCategory($slug);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -241,7 +242,7 @@ $cat = getProductByCategory($slug);
                         <h1><?= htmlspecialchars($cat[0]['category_name']) ?></h1>
                         <ul class="breadcrumb-list">
                             <li><a href="<?= BASE_URL ?>">Home</a></li>
-                            <li><span>/ </span><?= htmlspecialchars($cat[0]['category_name']) ?></li>
+                            <li><span>/ </span><?= 'Categories' ?? htmlspecialchars($cat[0]['category_name'])  ?></li>
                         </ul>
                     </div>
                 </div>
@@ -261,27 +262,57 @@ $cat = getProductByCategory($slug);
             </div>
             <div class="row g-4">
                 <?php
-                foreach($cat as $cats){
+                if (!empty($cat)) {
+                    foreach ($cat as $cats) {
+                        $images = explode(",",$cats['pro_img']);
+                                $first_img = trim($images[0]);
                 ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
-                    <div class="categories-card">
-                        <div class="categories-image">
-                            <a href="<?= BASE_URL ?>product-details/<?= $cats['slug_url'] ?>"><img src="<?= BASE_URL ?>admin/assets/img/uploads/<?= $cats['pro_img'] ?>" alt="<?= $cats['pro_name'] ?>"></a>
+                        <div class="col-lg-3 col-md-4 col-sm-6 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
+                            <div class="categories-card">
+                                <div class="categories-image">
+                                    <a href="<?= BASE_URL ?>product-details/<?= $cats['slug_url'] ?>"><img src="<?= BASE_URL ?>admin/assets/img/uploads/<?= $first_img ?>" alt="<?= $cats['pro_name'] ?>"></a>
+                                </div>
+                                <div class="categories-content">
+                                    <h5><a href="<?= BASE_URL ?>product-details/<?= $cats['slug_url'] ?>"><?= $cats['pro_name'] ?></a></h5>
+                                </div>
+                            </div>
                         </div>
-                        <div class="categories-content">
-                            <h5><a href="<?= BASE_URL ?>product-details/<?= $cats['slug_url'] ?>"><?= $cats['pro_name'] ?></a></h5>
+                    <?php
+                    }
+                } else {
+                    $limit = 20;
+                    $all_cat = get_category($limit);
+                    foreach ($all_cat as $acat) {
+                    ?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 wow animate fadeInDown" data-wow-delay="200ms" data-wow-duration="1500ms">
+                            <div class="categories-card">
+                                <div class="categories-image">
+                                    <a href="<?= BASE_URL ?>category.php?alias=<?= htmlspecialchars($acat['slug_url']) ?>">
+                                        <img src="<?= BASE_URL ?>admin/uploads/category/<?= htmlspecialchars($acat['image']) ?>"
+                                            alt="<?= htmlspecialchars($acat['name']) ?>"
+                                            onerror="this.src='<?= BASE_URL ?>assets/image/placeholder.jpg'">
+                                    </a>
+                                </div>
+                                <div class="categories-content">
+                                    <h5>
+                                        <a href="<?= BASE_URL ?>category.php?alias=<?= htmlspecialchars($acat['slug_url']) ?>">
+                                            <?= htmlspecialchars($acat['name']) ?>
+                                        </a>
+                                    </h5>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <?php } ?>
-                
+                <?php
+                    }
+                } ?>
+
             </div>
         </div>
     </div>
-   
+
     <!-- Categories section ends here -->
     <!-- footer section strats here -->
-     <?php include_once "includes/footer.php"; ?>
+    <?php include_once "includes/footer.php"; ?>
     <!-- footer section end here -->
 
 
@@ -318,6 +349,7 @@ $cat = getProductByCategory($slug);
             startVisible: true,
         });
     </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"70834e4b23964a2eaf7cf4ec0e5e9a84","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"70834e4b23964a2eaf7cf4ec0e5e9a84","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
+
 </html>
