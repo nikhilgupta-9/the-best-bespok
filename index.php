@@ -61,7 +61,7 @@ include_once "util/function.php";
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
+        background: linear-gradient(180deg, #00000014, rgba(0, 0, 0, 0.45));
         z-index: 2;
     }
 
@@ -299,7 +299,7 @@ include_once "util/function.php";
                                         </div>
                                     </div>
                                     <div class="shop-details-btn">
-                                        <a class="primary-btn" href="cart-page.html">ADD TO CART</a>
+                                        <a class="primary-btn" href="<?= BASE_URL ?>cart.php">ADD TO CART</a>
                                         <a class="primary-btn2" href="checkout-page.html">BUY NOW</a>
                                     </div>
                                     <ul class="product-shipping-delivers">
@@ -335,7 +335,7 @@ include_once "util/function.php";
                                     <div class="compare-wishlist-area">
                                         <ul>
                                             <li>
-                                                <a href="whislist.html">
+                                                <a href="<?= BASE_URL ?>whislist.php">
                                                     <span>
                                                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -525,34 +525,45 @@ include_once "util/function.php";
                             <?php
                             foreach($product_home as $home_pro){
                                 $images = explode(",",$home_pro['pro_img']);
-                                $first_img = $images[0];
+                                $first_img = trim($images[0]);
+                                $hp_discount = 0;
+                                if (!empty($home_pro['mrp']) && $home_pro['mrp'] > $home_pro['selling_price']) {
+                                    $hp_discount = round((($home_pro['mrp'] - $home_pro['selling_price']) / $home_pro['mrp']) * 100);
+                                }
                             ?>
                             <div class="swiper-slide">
                                 <div class="product-card">
                                     <div class="product-card-img">
                                         <a href="<?= BASE_URL ?>product-details/<?= $home_pro['slug_url'] ?>">
-                                            <img src="<?= BASE_URL ?>admin/assets/img/uploads/<?= $first_img ?>" alt="<?= $home_pro['pro_name'] ?>">
+                                            <img src="<?= BASE_URL ?>admin/assets/img/uploads/<?= $first_img ?>" alt="<?= htmlspecialchars($home_pro['pro_name']) ?>"
+                                                 onerror="this.src='<?= BASE_URL ?>assets/image/placeholder.jpg'">
                                         </a>
                                         <div class="batch">
-                                            <span class="new">23% off</span>
-                                            <span>Hot deal</span>
+                                            <?php if ($hp_discount > 0): ?><span class="new"><?= $hp_discount ?>% off</span><?php endif; ?>
+                                            <?php if (!empty($home_pro['new_arrival'])): ?><span>New</span><?php endif; ?>
                                         </div>
                                         <div class="overlay">
                                             <div class="cart-area">
-                                                <a class="add-cart-btn" href="cart-page.html"><i class="bi bi-bag-check"></i>
-                                                    Add To Cart</a>
+                                                <?php if (!empty($home_pro['is_customizable'])): ?>
+                                                    <a class="add-cart-btn" href="<?= BASE_URL ?>suit-configurator.php?id=<?= base64_encode($home_pro['id']) ?>">
+                                                        <i class="bi bi-palette"></i> Customise
+                                                    </a>
+                                                <?php else: ?>
+                                                    <a class="add-cart-btn" href="<?= BASE_URL ?>product-details/<?= htmlspecialchars($home_pro['slug_url']) ?>">
+                                                        <i class="bi bi-eye"></i> View Details
+                                                    </a>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="view-and-favorite-area">
                                             <ul>
                                                 <li>
-                                                    <a href="whislist.html">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                            viewBox="0 0 18 18">
-                                                            <path
-                                                                d="M16.528 2.20919C16.0674 1.71411 15.5099 1.31906 14.8902 1.04859C14.2704 0.778112 13.6017 0.637996 12.9255 0.636946C12.2487 0.637725 11.5794 0.777639 10.959 1.048C10.3386 1.31835 9.78042 1.71338 9.31911 2.20854L9.00132 2.54436L8.68352 2.20854C6.83326 0.217151 3.71893 0.102789 1.72758 1.95306C1.63932 2.03507 1.5541 2.12029 1.47209 2.20854C-0.490696 4.32565 -0.490696 7.59753 1.47209 9.71463L8.5343 17.1622C8.77862 17.4201 9.18579 17.4312 9.44373 17.1868C9.45217 17.1788 9.46039 17.1706 9.46838 17.1622L16.528 9.71463C18.4907 7.59776 18.4907 4.32606 16.528 2.20919ZM15.5971 8.82879H15.5965L9.00132 15.7849L2.40553 8.82879C0.90608 7.21113 0.90608 4.7114 2.40553 3.09374C3.76722 1.61789 6.06755 1.52535 7.5434 2.88703C7.61505 2.95314 7.68401 3.0221 7.75012 3.09374L8.5343 3.92104C8.79272 4.17781 9.20995 4.17781 9.46838 3.92104L10.2526 3.09438C11.6142 1.61853 13.9146 1.52599 15.3904 2.88767C15.4621 2.95378 15.531 3.02274 15.5971 3.09438C17.1096 4.71461 17.1207 7.2189 15.5971 8.82879Z">
-                                                            </path>
-                                                        </svg>
+                                                    <a href="javascript:void(0)"
+                                                       class="wishlist-btn"
+                                                       data-pid="<?= $home_pro['id'] ?>"
+                                                       onclick="toggleWishlist(<?= $home_pro['id'] ?>, this)"
+                                                       title="Add to Wishlist">
+                                                        <i class="bi bi-heart" style="font-size:16px"></i>
                                                     </a>
                                                 </li>
                                                 <li>
@@ -572,7 +583,7 @@ include_once "util/function.php";
                                         </div>
                                     </div>
                                     <div class="product-card-content">
-                                        <div class="rating">
+                                        <!-- <div class="rating">
                                             <ul>
                                                 <li><i class="bi bi-star-fill"></i></li>
                                                 <li><i class="bi bi-star-fill"></i></li>
@@ -580,7 +591,7 @@ include_once "util/function.php";
                                                 <li><i class="bi bi-star-fill"></i></li>
                                                 <li><i class="bi bi-star-fill"></i></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                         <h6>
                                             <a class="hover-underline" href="<?= BASE_URL ?>product-details/<?= $home_pro['slug_url'] ?>"><?= $home_pro['pro_name'] ?></a>
                                         </h6>
@@ -888,14 +899,13 @@ include_once "util/function.php";
                                         </div>
                                         <div class="overlay">
                                             <div class="cart-area">
-                                                <a class="add-cart-btn style-2" href="cart-page.html"><i class="bi bi-bag-check"></i>
-                                                    Add To Cart</a>
+                                                <a class="add-cart-btn style-2" href="<?= BASE_URL ?>products.php"><i class="bi bi-eye"></i> View Details</a>
                                             </div>
                                         </div>
                                         <div class="view-and-favorite-area">
                                             <ul>
                                                 <li>
-                                                    <a href="whislist.html">
+                                                    <a href="<?= BASE_URL ?>whislist.php">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 18 18">
                                                             <path
@@ -944,14 +954,13 @@ include_once "util/function.php";
                                         </a>
                                         <div class="overlay">
                                             <div class="cart-area">
-                                                <a class="add-cart-btn style-2" href="cart-page.html"><i class="bi bi-bag-check"></i>
-                                                    Add To Cart</a>
+                                                <a class="add-cart-btn style-2" href="<?= BASE_URL ?>products.php"><i class="bi bi-eye"></i> View Details</a>
                                             </div>
                                         </div>
                                         <div class="view-and-favorite-area">
                                             <ul>
                                                 <li>
-                                                    <a href="whislist.html">
+                                                    <a href="<?= BASE_URL ?>whislist.php">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 18 18">
                                                             <path
@@ -1000,22 +1009,13 @@ include_once "util/function.php";
                                         </a>
                                         <div class="overlay">
                                             <div class="cart-area">
-                                                <div class="countdown-timer">
-                                                    <ul>
-                                                        <li> XS</li>
-                                                        <li>S</li>
-                                                        <li>M</li>
-                                                        <li>L</li>
-                                                        <li>XL</li>
-                                                        <li>XXL</li>
-                                                    </ul>
-                                                </div>
+                                                <a class="add-cart-btn style-2" href="<?= BASE_URL ?>products.php"><i class="bi bi-eye"></i> View Details</a>
                                             </div>
                                         </div>
                                         <div class="view-and-favorite-area">
                                             <ul>
                                                 <li>
-                                                    <a href="whislist.html">
+                                                    <a href="<?= BASE_URL ?>whislist.php">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 18 18">
                                                             <path
@@ -1064,14 +1064,13 @@ include_once "util/function.php";
                                         </a>
                                         <div class="overlay">
                                             <div class="cart-area">
-                                                <a class="add-cart-btn style-2" href="cart-page.html"><i class="bi bi-bag-check"></i>
-                                                    Add To Cart</a>
+                                                <a class="add-cart-btn style-2" href="<?= BASE_URL ?>products.php"><i class="bi bi-eye"></i> View Details</a>
                                             </div>
                                         </div>
                                         <div class="view-and-favorite-area">
                                             <ul>
                                                 <li>
-                                                    <a href="whislist.html">
+                                                    <a href="<?= BASE_URL ?>whislist.php">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 18 18">
                                                             <path
@@ -1124,14 +1123,13 @@ include_once "util/function.php";
                                         </div>
                                         <div class="overlay">
                                             <div class="cart-area">
-                                                <a class="add-cart-btn style-2" href="cart-page.html"><i class="bi bi-bag-check"></i>
-                                                    Add To Cart</a>
+                                                <a class="add-cart-btn style-2" href="<?= BASE_URL ?>products.php"><i class="bi bi-eye"></i> View Details</a>
                                             </div>
                                         </div>
                                         <div class="view-and-favorite-area">
                                             <ul>
                                                 <li>
-                                                    <a href="whislist.html">
+                                                    <a href="<?= BASE_URL ?>whislist.php">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 18 18">
                                                             <path
@@ -1180,14 +1178,13 @@ include_once "util/function.php";
                                         </a>
                                         <div class="overlay">
                                             <div class="cart-area">
-                                                <a class="add-cart-btn style-2" href="product-details.php"><i class="bi bi-bag-check"></i>
-                                                    Add To Cart</a>
+                                                <a class="add-cart-btn style-2" href="<?= BASE_URL ?>products.php"><i class="bi bi-eye"></i> View Details</a>
                                             </div>
                                         </div>
                                         <div class="view-and-favorite-area">
                                             <ul>
                                                 <li>
-                                                    <a href="whislist.html">
+                                                    <a href="<?= BASE_URL ?>whislist.php">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                             viewBox="0 0 18 18">
                                                             <path

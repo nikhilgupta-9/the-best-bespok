@@ -331,3 +331,7 @@
         setupToggle('togglePassword3', 'password3');
     });
 </script>
+<script>
+    window.SITE_BASE = '<?= defined("BASE_URL") ? BASE_URL : "" ?>';
+</script>
+<script src="<?= defined('BASE_URL') ? BASE_URL : '' ?>assets/js/cart.js"></script>

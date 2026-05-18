@@ -829,98 +829,67 @@ $total_reviews = $rating_data['total'];
         function addToCart() {
             let quantity = parseInt($('#quantityInput').val()) || 1;
             let productId = <?= $product['id'] ?>;
+            let totalPrice = basePrice + selectedFabricModifier + selectedSizeModifier;
 
             $.ajax({
                 url: '<?= BASE_URL ?>ajax/add-to-cart.php',
                 type: 'POST',
+                dataType: 'json',
                 data: {
                     product_id: productId,
                     quantity: quantity,
-                    fabric_id: selectedFabricId,
-                    size_id: selectedSizeId,
-                    color_id: selectedColorId
+                    fabric_id: selectedFabricId || '',
+                    size_id: selectedSizeId || '',
+                    color_id: selectedColorId || '',
+                    total_price: totalPrice.toFixed(2)
                 },
-                success: function(response) {
-                    let res = JSON.parse(response);
+                success: function(res) {
                     if (res.success) {
-                        alert('Product added to cart!');
-                        updateCartCount();
+                        if (typeof showCartToast === 'function') showCartToast(res.message, 'success');
+                        if (typeof updateCartCount === 'function') updateCartCount(res.cart_count);
                     } else {
-                        alert(res.message || 'Error adding to cart');
+                        if (typeof showCartToast === 'function') showCartToast(res.message || 'Error adding to cart', 'error');
                     }
                 },
                 error: function() {
-                    alert('Error adding to cart');
+                    if (typeof showCartToast === 'function') showCartToast('Error adding to cart', 'error');
                 }
             });
         }
 
-        // Buy now
+        // Buy now — add to cart then redirect to checkout
         function buyNow() {
             let quantity = parseInt($('#quantityInput').val()) || 1;
             let productId = <?= $product['id'] ?>;
+            let totalPrice = basePrice + selectedFabricModifier + selectedSizeModifier;
 
             $.ajax({
                 url: '<?= BASE_URL ?>ajax/add-to-cart.php',
                 type: 'POST',
+                dataType: 'json',
                 data: {
                     product_id: productId,
                     quantity: quantity,
-                    fabric_id: selectedFabricId,
-                    size_id: selectedSizeId,
-                    color_id: selectedColorId,
-                    buy_now: true
+                    fabric_id: selectedFabricId || '',
+                    size_id: selectedSizeId || '',
+                    color_id: selectedColorId || '',
+                    total_price: totalPrice.toFixed(2)
                 },
-                success: function(response) {
+                success: function() {
                     window.location.href = '<?= BASE_URL ?>checkout.php';
                 },
                 error: function() {
-                    alert('Error processing request');
+                    if (typeof showCartToast === 'function') showCartToast('Error processing request', 'error');
                 }
             });
         }
 
-        // Add to wishlist
         function addToWishlist(productId) {
-            $.ajax({
-                url: '<?= BASE_URL ?>ajax/add-to-wishlist.php',
-                type: 'POST',
-                data: {
-                    product_id: productId
-                },
-                success: function(response) {
-                    alert('Added to wishlist!');
-                },
-                error: function() {
-                    alert('Please login to add to wishlist');
-                }
-            });
+            var btn = document.querySelector('.compare-wishlist-area a[onclick*="addToWishlist"]');
+            if (typeof toggleWishlist === 'function') toggleWishlist(productId, btn);
         }
 
-        function addToCartDirect(productId) {
-            $.ajax({
-                url: '<?= BASE_URL ?>ajax/add-to-cart.php',
-                type: 'POST',
-                data: {
-                    product_id: productId,
-                    quantity: 1
-                },
-                success: function(response) {
-                    alert('Product added to cart!');
-                    updateCartCount();
-                }
-            });
-        }
-
-        function updateCartCount() {
-            $.ajax({
-                url: '<?= BASE_URL ?>ajax/cart-count.php',
-                type: 'GET',
-                success: function(count) {
-                    $('.cart-count').text(count);
-                }
-            });
-        }
+        // addToCartDirect and updateCartCount are defined globally in cart.js
 
         // Quantity handlers
         $('.quantity__plus').click(function() {

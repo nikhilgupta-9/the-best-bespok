@@ -373,7 +373,7 @@ $brand = get_best_brand();
             </li>
             <li>
                 <div class="cart-area">
-                    <a href="whislist.php">
+                    <a href="<?= BASE_URL ?>whislist.php">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -381,12 +381,12 @@ $brand = get_best_brand();
                                 fill="white" />
                         </svg>
                     </a>
-                    <span>0</span>
+                    <span class="wishlist-count">0</span>
                 </div>
             </li>
             <li>
                 <div class="cart-area">
-                    <a href="cart.php">
+                    <a href="<?= BASE_URL ?>cart.php">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -399,7 +399,7 @@ $brand = get_best_brand();
                                 stroke-linejoin="round" />
                         </svg>
                     </a>
-                    <span>0</span>
+                    <span class="cart-count">0</span>
                 </div>
             </li>
         </ul>
